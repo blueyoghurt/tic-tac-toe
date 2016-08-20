@@ -1,3 +1,38 @@
 h1 {
   color: purple;
+  font-size: 200%;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.player-announcement{
+  color: orange;
+  font-size: 150%;
+  background-color: blue
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.board {
+  width: 52.5%;
+  display: block;
+  margin: 0 auto;
+}
+
+.row {
+  width: 100%;
+  display: block;
+  margin: inherit;
+}
+
+.grid {
+  width: 200px;
+  height: 200px;
+  background-color: gold;
+  display: inline-block;
+  margin: 1.5% 2%;
+  border-radius: 10px;
+  /*margin-left: 5%;*/
 }
