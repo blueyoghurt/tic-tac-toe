@@ -6,7 +6,7 @@ var turn = 0;
 for(var i=0;i<grids.length;i++){
     grids[i].addEventListener('click',checkOccupancy,false);
   }
-console.log(document.getElementById('resetButton'));
+
 document.getElementById('resetButton').addEventListener('click',resetButton,false);
 
 // });
@@ -16,6 +16,7 @@ function resetButton (){
   for (k=0;k<grids.length;k++){
     grids[k].value = undefined;
     grids[k].className = 'grid';
+    turn = 0;
   }
 }
 
