@@ -2,31 +2,40 @@
 
 var grids = document.getElementsByClassName('grid');
 var turn = 0;
+var mode = 0;
 
-for(var i=0;i<grids.length;i++){
+for(i=0;i<grids.length;i++){
     grids[i].addEventListener('click',checkOccupancy,false);
   }
 
 document.getElementById('resetButton').addEventListener('click',resetButton,false);
 
-// });
+document.getElementById('singleplayer').addEventListener('click',singlePlayer,false);
+function singlePlayer() {
+    document.getElementById('singleplayer').style.border = "solid red";
+    document.getElementById('multiplayer').style.border = "";
+    document.querySelector('.player-announcement').style.color = "red";
+    document.querySelector('.player-announcement').textContent = "OKAY! Player, it's your move";
+    mode = "singleplayer";
+}
 
-function resetButton (){
-  console.log('reset button pressed');
-  for (k=0;k<grids.length;k++){
-    grids[k].value = undefined;
-    grids[k].className = 'grid';
-    turn = 0;
-    document.querySelector('.player-announcement').textContent = "Click a cell to begin";
-  }
+document.getElementById('multiplayer').addEventListener('click',multiPlayer,false);
+function multiPlayer() {
+    document.getElementById('multiplayer').style.border = "solid red";
+    document.getElementById('singleplayer').style.border = "";
+    document.querySelector('.player-announcement').style.color = "red";
+    document.querySelector('.player-announcement').textContent = "Player 1! You start!";
+      mode = "multiplayer";
 }
 
 function checkOccupancy() {
-  if (this.value == undefined && !(checkWinner(grids))) {
-    checkCell (this);
-  } else if (this.value == 'x' || this.value =='o'){
-      document.querySelector('.player-announcement').innerHTML += "Cell is occupied<br>";
-  }
+  if( mode === "singleplayer"|| mode === "multiplayer"){
+    if (this.value == undefined && !(checkWinner(grids))) {
+      checkCell (this);
+    } else if (this.value == 'x' || this.value =='o'){
+        document.querySelector('.player-announcement').innerHTML += "Cell is occupied<br>";
+    }
+  } else document.querySelector('.player-announcement').textContent = "Select Game Mode";
 }
 
 function checkCell(cell){
@@ -80,6 +89,19 @@ function checkDiagonal(array){
       (array[6].value == array[4].value && array[6].value == array[2].value && array[6].value != undefined) ){
         return true;
       } else return false;
+}
+
+function resetButton (){
+  for (k=0;k<grids.length;k++){
+    grids[k].value = undefined;
+    grids[k].className = 'grid';
+    document.getElementById('multiplayer').style.border = "";
+    document.getElementById('singleplayer').style.border = "";
+    turn = 0;
+    mode = 0;
+    document.querySelector('.player-announcement').style.color = "orange";
+    document.querySelector('.player-announcement').textContent = "Select Game Mode";
+  }
 }
 
 // returns false if there are still empty cells
