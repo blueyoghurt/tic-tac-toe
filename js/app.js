@@ -3,6 +3,9 @@
 var grids = document.getElementsByClassName('grid');
 var turn = 0;
 var mode = 0;
+activePlayer = {};
+lastPlayer = {};
+var y = 0;
 
 for(i=0;i<grids.length;i++){
     grids[i].addEventListener('click',checkOccupancy,false);
@@ -33,42 +36,74 @@ function multiPlayer() {
 function checkOccupancy() {
   if( mode === "singleplayer"|| mode === "multiplayer"){
     if (this.value == undefined && !(checkWinner(grids))) {
-      checkCell (this);
-    } else if (this.value == 'x' || this.value =='o'){
+      checkPlayer();
+      isAiMode (this);
+    } else if (this.value == activePlayer.value || this.value == lastPlayer.value){
         document.querySelector('.player-announcement').textContent = "Cell is occupied";
     }
   } else document.querySelector('.player-announcement').textContent = "Select Game Mode";
 }
 
-function checkCell(cell){
-  if( (turn%2) ===0 ) {
-    cell.className = 'grid turnRed';
-    cell.value = 'x';
-      if (!checkWinner(grids) && checkEmptyCells(grids)){
-        document.querySelector('.player-announcement').textContent = "It's a draw!";
-      } else if (!checkWinner(grids)){
-        document.querySelector('.player-announcement').textContent = "Player's 2 turn";
-        document.getElementById('p2icon').style.border = "red solid";
-        document.getElementById('p1icon').style.border = "";
-        turn++;
-        } else {
-          document.querySelector('.player-announcement').textContent = "Player 1 Wins!";
-      }
+function checkPlayer (){
+  if ((turn%2) == 0) {
+      activePlayer.value ="Player 1";
+      activePlayer.assignedClassName = "grid turnRed";
+      activePlayer.activeIconId = "p2icon";
+      activePlayer.announcement = "Player's 2 turn";
+      activePlayer.WinningAnnouncement = "Player 1 wins!"
+      lastPlayer.value = "Player 2";
+      lastPlayer.activeIconId = "p1icon";
   } else {
-    cell.className = 'grid turnGreen';
-    cell.value = 'o';
-      if (!checkWinner(grids) && checkEmptyCells(grids)){
-        document.querySelector('.player-announcement').textContent = "It's a draw!";
-      } else if (!checkWinner(grids)){
-          document.querySelector('.player-announcement').textContent = "Player's 1 turn";
-          document.getElementById('p1icon').style.border = "red solid";
-          document.getElementById('p2icon').style.border = "";
-          turn++;
-          } else {
-            document.querySelector('.player-announcement').textContent = "Player 2 Wins!";
-      }
+      activePlayer.value ="Player 2";
+      activePlayer.assignedClassName = "grid turnGreen";
+      activePlayer.activeIconId = "p1icon";
+      activePlayer.announcement = "Player's 1 turn";
+      activePlayer.WinningAnnouncement = "Player 2 wins!"
+      lastPlayer.value = "Player 1";
+      lastPlayer.activeIconId = "p2icon";
   }
 }
+
+function isAiMode (cell){
+  if (mode === "singleplayer" && activePlayer.value === "Player 2" ){
+    console.log('entering function to choose random cell with player 2');
+    chooseRandomCell(cell);
+  } else checkCell(cell);
+    console.log(mode);
+}
+
+function chooseRandomCell (){
+  y = chooseRandomNumber();
+  console.log(y);
+  while (grids[y].value != undefined ){
+      y = chooseRandomNumber();
+      console.log(y);
+      if (grids[y].value == undefined){
+        checkCell(grids[y]);
+        break;
+      }
+  } checkCell(grids[y]);
+}
+
+function chooseRandomNumber() {
+    return Math.floor(Math.random() * (9)) + 0;
+}
+
+function checkCell(cell){
+  cell.className = activePlayer.assignedClassName;
+  cell.value = activePlayer.value;
+  if (!checkWinner(grids) && checkEmptyCells(grids)){
+    document.querySelector('.player-announcement').textContent = "It's a draw!";
+  } else if (checkWinner(grids)){
+    document.querySelector('.player-announcement').textContent = activePlayer.WinningAnnouncement;
+    } else {
+      document.querySelector('.player-announcement').textContent = activePlayer.announcement;
+      document.getElementById(activePlayer.activeIconId).style.border = "red solid";
+      document.getElementById(lastPlayer.activeIconId).style.border = "";
+      turn++;
+  }
+}
+
 //returns false if there are still empty cells
 function checkEmptyCells (array){
   for (j=0; j< array.length; j++){
@@ -107,7 +142,6 @@ function checkDiagonal(array){
       } else return false;
 }
 
-
 function resetButton (){
   for (k=0;k<grids.length;k++){
     grids[k].value = undefined;
@@ -122,13 +156,6 @@ function resetButton (){
     document.getElementById('p2icon').style.border = "";
   }
 }
-//
-// function checkDraw (array) {
-//   if (undefined in array.value){
-//     console.log('there are still available moves.');
-//   }
-// }
-
 
 // function findWithAttr(array, attr, value) {
 //     for(var i = 0; i < array.length; i += 1) {
