@@ -5,7 +5,7 @@ var turn = 0;
 var mode = 0;
 activePlayer = {};
 lastPlayer = {};
-var y = 0;
+var y = chooseRandomNumber();
 
 for(i=0;i<grids.length;i++){
     grids[i].addEventListener('click',checkOccupancy,false);
@@ -69,20 +69,12 @@ function isAiMode (cell){
     console.log('entering function to choose random cell with player 2');
     chooseRandomCell(cell);
   } else checkCell(cell);
-    console.log(mode);
 }
 
 function chooseRandomCell (){
-  y = chooseRandomNumber();
-  console.log(y);
-  while (grids[y].value != undefined ){
-      y = chooseRandomNumber();
-      console.log(y);
-      if (grids[y].value == undefined){
-        checkCell(grids[y]);
-        break;
-      }
-  } checkCell(grids[y]);
+  while (grids[y].value != undefined){
+    y = chooseRandomNumber();
+  }  checkCell(grids[y]);
 }
 
 function chooseRandomNumber() {
@@ -96,6 +88,7 @@ function checkCell(cell){
     document.querySelector('.player-announcement').textContent = "It's a draw!";
   } else if (checkWinner(grids)){
     document.querySelector('.player-announcement').textContent = activePlayer.WinningAnnouncement;
+    document.getElementById(lastPlayer.activeIconId).style.width = "20%";
     } else {
       document.querySelector('.player-announcement').textContent = activePlayer.announcement;
       document.getElementById(activePlayer.activeIconId).style.border = "red solid";
@@ -154,17 +147,7 @@ function resetButton (){
     document.querySelector('.player-announcement').textContent = "Select Game Mode";
     document.getElementById('p1icon').style.border = "";
     document.getElementById('p2icon').style.border = "";
+    document.getElementById(lastPlayer.activeIconId).style.width = "15%";
+    document.getElementById(activePlayer.activeIconId).style.width = "15%";
   }
 }
-
-// function findWithAttr(array, attr, value) {
-//     for(var i = 0; i < array.length; i += 1) {
-//         if(array[i][attr] === value) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
-
-// var arr = Array.from(grids);
-// arr.splice(3,1);
