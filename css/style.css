@@ -44,3 +44,20 @@ h1 {
 .turnGreen {
   background-color: green;
 }
+
+.reset {
+  width: 52.5%;
+  margin: 2% auto;
+  text-align: center;
+}
+
+#resetButton {
+  font-size: 200%;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  border: 0px;
+  color: red;
+  background-color: transparent;
+  padding: 1%
+}

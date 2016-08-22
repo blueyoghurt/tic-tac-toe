@@ -1,17 +1,30 @@
+// document.addEventListener('DOMContentLoaded',function(){
+
 var grids = document.getElementsByClassName('grid');
 var turn = 0;
-
-// var arr = Array.from(grids);
-// arr.splice(3,1);
 
 for(var i=0;i<grids.length;i++){
     grids[i].addEventListener('click',checkOccupancy,false);
   }
+console.log(document.getElementById('resetButton'));
+document.getElementById('resetButton').addEventListener('click',resetButton,false);
+
+// });
+
+function resetButton (){
+  console.log('reset button pressed');
+  for (k=0;k<grids.length;k++){
+    grids[k].value = undefined;
+    grids[k].className = 'grid';
+  }
+}
 
 function checkOccupancy() {
-  if (this.value == undefined) {
+  if (this.value == undefined && !(checkWinner(grids))) {
     checkCell (this);
-  } else window.alert('Cell is occupied');
+  } else if (this.value == 'x' || this.value =='o'){
+      document.querySelector('.player-announcement').innerHTML += "Cell is occupied<br>";
+  }
 }
 
 function checkCell(cell){
@@ -20,7 +33,7 @@ function checkCell(cell){
     cell.value = 'x';
       if (!checkWinner(grids)){
           // checkDraw(grids);
-          document.querySelector('.player-announcement').textContent = "Player's 2 turn";
+          document.querySelector('.player-announcement').innerHTML = "Player's 2 turn<br>";
           turn++;
       } else {
           document.querySelector('.player-announcement').textContent = "Player 1 Wins!";
@@ -30,7 +43,7 @@ function checkCell(cell){
     cell.value = 'o';
       if (!checkWinner(grids)){
           // checkDraw(grids);
-          document.querySelector('.player-announcement').textContent = "Player's 1 turn";
+          document.querySelector('.player-announcement').innerHTML = "Player's 1 turn<br>";
           turn++;
       } else {
           document.querySelector('.player-announcement').textContent = "Player 2 Wins!";
@@ -40,7 +53,6 @@ function checkCell(cell){
 
 function checkWinner(array) {
   if (checkRow(array) || checkCol(array) || checkDiagonal(array)){
-    window.alert('We have a winner!');
     return true;
   } else return false;
 }
@@ -71,7 +83,7 @@ function checkDiagonal(array){
 // returns false if there are still empty cells
 // function checkDraw (array){
 //   for (j=0; j< array.length; j++){
-//    if (array[j] == undefined)  {
+//    if (array[j] != undefined)  {
 //      window.alert('its a draw!');
 //      return false;
 //    }
@@ -87,3 +99,6 @@ function checkDiagonal(array){
 //     }
 //     return -1;
 // }
+
+// var arr = Array.from(grids);
+// arr.splice(3,1);
