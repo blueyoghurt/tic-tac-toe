@@ -1,17 +1,13 @@
 var grids = document.getElementsByClassName('grid');
 var turn = 0;
 
-
-// console.log(typeof(grids));
 // var arr = Array.from(grids);
-// console.log(arr);
 // arr.splice(3,1);
-// console.log(grids);
 
 listentoclicks();
 
 function listentoclicks(){
-  for(var i=0;i<arr.length;i++){
+  for(var i=0;i<grids.length;i++){
     if (grids[i].value == undefined) {
         grids[i].addEventListener('click',checkcell,false);
     }
