@@ -81,6 +81,10 @@ button:hover {
   /*margin-left: 5%;*/
 }
 
+.grid:hover {
+  background-color: #CFB53B;
+}
+
 .turnRed {
   background-color: red;
 }

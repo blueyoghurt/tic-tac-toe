@@ -66,9 +66,16 @@ function checkPlayer (){
 
 function isAiMode (cell){
   if (mode === "singleplayer" && activePlayer.value === "Player 2" ){
-    console.log('entering function to choose random cell with player 2');
-    chooseRandomCell(cell);
-  } else checkCell(cell);
+    chooseRandomCell();
+  } else if (mode === "singleplayer" && activePlayer.value === "Player 1" && turn<= 7){
+    checkCell(cell);
+    // if (!checkWinner(grids) && checkEmptyCells(grids)){
+      checkPlayer ();
+      chooseRandomCell();
+    // }
+  } else
+
+  checkCell(cell);
 }
 
 function chooseRandomCell (){
