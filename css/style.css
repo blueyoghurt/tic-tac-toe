@@ -67,18 +67,22 @@ button:hover {
   margin: inherit;
 }
 
-.grid {
-  width: 28%;
-  height: 200px;
-  background-color: gold;
+.gridcontainer {
   display: inline-block;
+  width: 28%;
   margin: 1.5% 2%;
+}
+
+.grid {
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: gold;
   border-radius: 10px;
   /*margin-left: 5%;*/
 }
 
-.turnBlue {
-  background-color: blue;
+.turnRed {
+  background-color: red;
 }
 
 .turnGreen {

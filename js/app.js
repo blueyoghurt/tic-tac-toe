@@ -42,7 +42,7 @@ function checkOccupancy() {
 
 function checkCell(cell){
   if( (turn%2) ===0 ) {
-    cell.className = 'grid turnBlue';
+    cell.className = 'grid turnRed';
     cell.value = 'x';
       if (!checkWinner(grids) && checkEmptyCells(grids)){
         document.querySelector('.player-announcement').textContent = "It's a draw!";
