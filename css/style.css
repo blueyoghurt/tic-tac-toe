@@ -6,6 +6,12 @@ h1 {
   font-family: 'Press Start 2P', cursive;
 }
 
+.reset {
+  width: 52.5%;
+  margin: 2% auto;
+  text-align: center;
+}
+
 .optionSelect {
   font-size: 100%;
   text-transform: uppercase;
@@ -18,6 +24,9 @@ h1 {
   margin: 1%
 }
 
+button:hover {
+  background-color: orange;
+}
 #resetButton {
   font-size: 100%;
   text-transform: uppercase;
@@ -28,6 +37,13 @@ h1 {
   background-color: pink;
   padding: 1.5%;
   margin-left: 3%
+}
+
+
+.picon {
+  width: 15%;
+  margin: 0 7%;
+  padding: 2%;
 }
 
 .player-announcement{
@@ -67,10 +83,4 @@ h1 {
 
 .turnGreen {
   background-color: green;
-}
-
-.reset {
-  width: 52.5%;
-  margin: 2% auto;
-  text-align: center;
 }

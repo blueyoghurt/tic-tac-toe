@@ -16,6 +16,7 @@ function singlePlayer() {
     document.getElementById('multiplayer').style.border = "";
     document.querySelector('.player-announcement').style.color = "red";
     document.querySelector('.player-announcement').textContent = "OKAY! Player, it's your move";
+    document.getElementById('p1icon').style.border = "red solid";
     mode = "singleplayer";
 }
 
@@ -25,7 +26,8 @@ function multiPlayer() {
     document.getElementById('singleplayer').style.border = "";
     document.querySelector('.player-announcement').style.color = "red";
     document.querySelector('.player-announcement').textContent = "Player 1! You start!";
-      mode = "multiplayer";
+    document.getElementById('p1icon').style.border = "red solid";
+    mode = "multiplayer";
 }
 
 function checkOccupancy() {
@@ -33,7 +35,7 @@ function checkOccupancy() {
     if (this.value == undefined && !(checkWinner(grids))) {
       checkCell (this);
     } else if (this.value == 'x' || this.value =='o'){
-        document.querySelector('.player-announcement').innerHTML += "Cell is occupied<br>";
+        document.querySelector('.player-announcement').textContent = "Cell is occupied";
     }
   } else document.querySelector('.player-announcement').textContent = "Select Game Mode";
 }
@@ -44,7 +46,9 @@ function checkCell(cell){
     cell.value = 'x';
       if (!checkWinner(grids)){
           // checkDraw(grids);
-          document.querySelector('.player-announcement').innerHTML = "Player's 2 turn<br>";
+          document.querySelector('.player-announcement').textContent = "Player's 2 turn";
+          document.getElementById('p2icon').style.border = "red solid";
+          document.getElementById('p1icon').style.border = "";
           turn++;
       } else {
           document.querySelector('.player-announcement').textContent = "Player 1 Wins!";
@@ -54,7 +58,9 @@ function checkCell(cell){
     cell.value = 'o';
       if (!checkWinner(grids)){
           // checkDraw(grids);
-          document.querySelector('.player-announcement').innerHTML = "Player's 1 turn<br>";
+          document.querySelector('.player-announcement').textContent = "Player's 1 turn";
+          document.getElementById('p1icon').style.border = "red solid";
+          document.getElementById('p2icon').style.border = "";
           turn++;
       } else {
           document.querySelector('.player-announcement').textContent = "Player 2 Wins!";
@@ -101,6 +107,8 @@ function resetButton (){
     mode = 0;
     document.querySelector('.player-announcement').style.color = "orange";
     document.querySelector('.player-announcement').textContent = "Select Game Mode";
+    document.getElementById('p1icon').style.border = "";
+    document.getElementById('p2icon').style.border = "";
   }
 }
 
