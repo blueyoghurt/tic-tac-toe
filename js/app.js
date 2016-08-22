@@ -4,34 +4,34 @@ var turn = 0;
 // var arr = Array.from(grids);
 // arr.splice(3,1);
 
-listentoclicks();
-
-function listentoclicks(){
-  for(var i=0;i<grids.length;i++){
-    if (grids[i].value == undefined) {
-        grids[i].addEventListener('click',checkcell,false);
-    }
+for(var i=0;i<grids.length;i++){
+    grids[i].addEventListener('click',checkOccupancy,false);
   }
+
+function checkOccupancy() {
+  if (this.value == undefined) {
+    checkCell (this);
+  } else window.alert('Cell is occupied');
 }
 
-function checkcell(){
+function checkCell(cell){
   if( (turn%2) ===0 ) {
-    this.className = 'grid turnBlue';
-    this.value = 'x';
+    cell.className = 'grid turnBlue';
+    cell.value = 'x';
       if (!checkWinner(grids)){
+          // checkDraw(grids);
           document.querySelector('.player-announcement').textContent = "Player's 2 turn";
           turn++;
-          listentoclicks();
       } else {
           document.querySelector('.player-announcement').textContent = "Player 1 Wins!";
       }
   } else {
-    this.className = 'grid turnGreen';
-    this.value = 'o';
+    cell.className = 'grid turnGreen';
+    cell.value = 'o';
       if (!checkWinner(grids)){
+          // checkDraw(grids);
           document.querySelector('.player-announcement').textContent = "Player's 1 turn";
           turn++;
-          listentoclicks();
       } else {
           document.querySelector('.player-announcement').textContent = "Player 2 Wins!";
       }
@@ -67,6 +67,17 @@ function checkDiagonal(array){
         return true;
       } else return false;
 }
+
+// returns false if there are still empty cells
+// function checkDraw (array){
+//   for (j=0; j< array.length; j++){
+//    if (array[j] == undefined)  {
+//      window.alert('its a draw!');
+//      return false;
+//    }
+//    return true;
+//   }
+// }
 
 // function findWithAttr(array, attr, value) {
 //     for(var i = 0; i < array.length; i += 1) {
