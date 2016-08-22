@@ -17,6 +17,7 @@ function resetButton (){
     grids[k].value = undefined;
     grids[k].className = 'grid';
     turn = 0;
+    document.querySelector('.player-announcement').textContent = "Click a cell to begin";
   }
 }
 
