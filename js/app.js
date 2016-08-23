@@ -1,5 +1,4 @@
 // document.addEventListener('DOMContentLoaded',function(){
-
 var grids = document.getElementsByClassName('grid');
 var turn = 0;
 var mode = 0;
@@ -148,15 +147,11 @@ function resetButton (){
   for (k=0;k<grids.length;k++){
     grids[k].value = undefined;
     grids[k].className = 'grid';
-    document.getElementById('multiplayer').style.border = "";
-    document.getElementById('singleplayer').style.border = "";
-    turn = mode = 0;
-    console.log(turn, mode);
+    document.getElementById('multiplayer').style.border = document.getElementById('singleplayer').style.border = "";
     document.querySelector('.player-announcement').style.color = "orange";
     document.querySelector('.player-announcement').textContent = "Select Game Mode";
-    document.getElementById('p1icon').style.border = "";
-    document.getElementById('p2icon').style.border = "";
-    document.getElementById(lastPlayer.activeIconId).style.width = "15%";
-    document.getElementById(activePlayer.activeIconId).style.width = "15%";
+    document.getElementById('p1icon').style.border = document.getElementById('p2icon').style.border = "";
+    document.getElementById(lastPlayer.activeIconId).style.width = document.getElementById(activePlayer.activeIconId).style.width = "15%";
+    turn = mode = 0;
   }
 }
