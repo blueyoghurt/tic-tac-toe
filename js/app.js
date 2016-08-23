@@ -67,14 +67,13 @@ function checkPlayer (){
 function isAiMode (cell){
   if (mode === "singleplayer" && activePlayer.value === "Player 2" ){
     chooseRandomCell();
-  } else if (mode === "singleplayer" && activePlayer.value === "Player 1" && turn<= 7){
+  } else if (mode === "singleplayer" && activePlayer.value === "Player 1"){
     checkCell(cell);
     if (!checkWinner(grids) && !checkEmptyCells(grids)){
       checkPlayer ();
       chooseRandomCell();
      }
   } else
-
   checkCell(cell);
 }
 
@@ -151,8 +150,8 @@ function resetButton (){
     grids[k].className = 'grid';
     document.getElementById('multiplayer').style.border = "";
     document.getElementById('singleplayer').style.border = "";
-    turn = 0;
-    mode = 0;
+    turn = mode = 0;
+    console.log(turn, mode);
     document.querySelector('.player-announcement').style.color = "orange";
     document.querySelector('.player-announcement').textContent = "Select Game Mode";
     document.getElementById('p1icon').style.border = "";
