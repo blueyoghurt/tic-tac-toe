@@ -69,10 +69,10 @@ function isAiMode (cell){
     chooseRandomCell();
   } else if (mode === "singleplayer" && activePlayer.value === "Player 1" && turn<= 7){
     checkCell(cell);
-    // if (!checkWinner(grids) && checkEmptyCells(grids)){
+    if (!checkWinner(grids) && !checkEmptyCells(grids)){
       checkPlayer ();
       chooseRandomCell();
-    // }
+     }
   } else
 
   checkCell(cell);
@@ -110,7 +110,10 @@ function checkEmptyCells (array){
     if (array[j].value == undefined)  {
       return false;
     }
-  }   return true;
+  }
+  document.getElementById(activePlayer.activeIconId).style.border = "";
+  document.getElementById(lastPlayer.activeIconId).style.border = "";
+  return true;
 }
 
 function checkWinner(array) {
